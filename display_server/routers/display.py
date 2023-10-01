@@ -2,7 +2,6 @@ from fastapi import APIRouter, Form, Request, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import FileResponse
 from dataclasses import dataclass
-from display import display_contr
 import logging
 import base64
 
@@ -25,4 +24,5 @@ async def read_display(request: Request):
 
 @router.post("/display/image")
 async def get_display_image():
-    return FileResponse(display_contr.get_image(), media_type="image/png")
+    # TODO: get image from display controller
+    pass

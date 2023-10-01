@@ -3,6 +3,8 @@ from fastapi.templating import Jinja2Templates
 from dataclasses import dataclass
 import logging
 
+from controller.settings_controller import Settings, SettingsData
+
 logger = logging.getLogger(__name__)
 
 router = APIRouter(
@@ -11,16 +13,6 @@ router = APIRouter(
 
 templates = Jinja2Templates(directory="templates")
 
-@dataclass
-class SettingsData():
-    size: str = Form(...)
-    orientation: int = Form(...)
-
-settings = SettingsData(
-    size="5.65",
-    orientation=0
-)
-
 @router.get("/settings")
 async def read_settings(request: Request, response_model=SettingsData):
     accept_header = request.headers.get("Accept")
@@ -28,11 +20,11 @@ async def read_settings(request: Request, response_model=SettingsData):
     if "text/html" in accept_header:
         return templates.TemplateResponse("settings.html", {"request": request})
     else:
-        return settings
+        return Settings
     
 @router.post("/settings")
 async def update_settings(request: Request, data: SettingsData = Depends()):
-    logger.info(f"POST /settings size={data.size} orientation={data.orientation}")
+    logger.info(f"POST /settings size={data}")
     accept_header = request.headers.get("Accept")
     
     if "text/html" in accept_header:
