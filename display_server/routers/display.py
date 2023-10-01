@@ -13,14 +13,18 @@ router = APIRouter(
 
 templates = Jinja2Templates(directory="templates")
 
+
 @router.get("/display")
 async def read_display(request: Request):
     accept_header = request.headers.get("Accept")
 
     if "text/html" in accept_header:
-        return templates.TemplateResponse("display.html", {"request": request, "image": ()})
+        return templates.TemplateResponse(
+            "display.html", {"request": request, "image": ()}
+        )
     else:
         return {"message": "image with the "}
+
 
 @router.post("/display/image")
 async def get_display_image():
