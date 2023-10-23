@@ -7,11 +7,12 @@ from fastapi.responses import HTMLResponse
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+import uvicorn
 
 from routers import display, settings
 
-logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
-logger = logging.getLogger(__name__) 
+logging.config.fileConfig("logging.conf", disable_existing_loggers=False)
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 security = HTTPBasic()
@@ -22,6 +23,7 @@ templates = Jinja2Templates(directory="templates")
 app.include_router(settings.router)
 app.include_router(display.router)
 
+
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     accept_header = request.headers.get("Accept")
@@ -30,6 +32,12 @@ async def read_root(request: Request):
         return templates.TemplateResponse("index.html", {"request": request})
     else:
         return {"message": "Welcome to the FastAPI app!"}
+
+
+def start():
+    """Launched with `poetry run start` at root level"""
+    uvicorn.run("my_package.main:app", host="0.0.0.0", port=8000, reload=True)
+
 
 def get_current_username(
     credentials: Annotated[HTTPBasicCredentials, Depends(security)]

@@ -12,16 +12,15 @@ class SettingsData:
     orientation: int = Form(...)
 
 
-class Settings:
+class Settings(object):
     _setting_data: SettingsData = None
 
     def __new__(cls):
         if cls._setting_data is None:
-            cls._setting_data = cls.__new__(cls)
-            try:
-                cls._setting_data.config = ConfigParser.ConfigParser()
-                cls._setting_data.config.read("../config.ini")
-            except Exception as e:
-                cls._settings = SettingsData(size="5.65", orientation=0)
-
+            cls._setting_data = super(Settings, cls).__new__(cls)
+            cls._settings = SettingsData(size="5.65", orientation=0)
         return cls._setting_data
+
+    @property
+    def setting_data(self):
+        return self._setting_data
