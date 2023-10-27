@@ -35,3 +35,7 @@ https://forum.up-community.org/discussion/2141/solved-tutorial-gpio-i2c-spi-acce
 
 2. start uvicorn
   ```uvicorn main:app --host 0.0.0.0```
+
+## Bind it as a RESTful sensor in HomeAssistant
+
+https://www.home-assistant.io/integrations/sensor.rest
