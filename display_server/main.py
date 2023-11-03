@@ -34,9 +34,9 @@ async def read_root(request: Request):
         return {"message": "Welcome to the FastAPI app!"}
 
 
-def start():
+if __name__ == "__main__":
     """Launched with `poetry run start` at root level"""
-    uvicorn.run("my_package.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=False)
 
 
 def get_current_username(
