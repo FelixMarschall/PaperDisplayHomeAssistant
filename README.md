@@ -33,3 +33,18 @@ https://forum.up-community.org/discussion/2141/solved-tutorial-gpio-i2c-spi-acce
 ## Bind it as a RESTful sensor in HomeAssistant
 
 https://www.home-assistant.io/integrations/sensor.rest
+
+configuration.yaml
+
+```
+rest_command:
+  eink_01_init:
+    url: "http://aifb-bis-iot-rpi-eink-01.aifb.kit.edu:8000/display/init"
+    method: GET
+  eink_01_test:
+    url: "http://aifb-bis-iot-rpi-eink-01.aifb.kit.edu:8000/display/test"
+    method: GET
+  eink_01_clear:
+    url: "http://aifb-bis-iot-rpi-eink-01.aifb.kit.edu:8000/display/clear"
+    method: GET
+```
