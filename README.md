@@ -2,12 +2,6 @@
 
 ## Setup
 
-### Permissions to access the RP spi interface are necessary
-   
-1. '''sudo nano /etc/udev/rules.d/50-spi.rules# PaperDisplayIntegration
-
-## Setup
-
 ### permissons to access the RP spi interface are necessary
 
 1. create rule file
